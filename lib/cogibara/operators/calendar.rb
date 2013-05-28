@@ -3,7 +3,7 @@ require 'google_calendar'
 class Calendar < Cogibara::OperatorBase
 
   def initialize_operator
-    @calendar = Google::Calendar.new(username: 'wstrinz', password: 'wvyqigxaonctilxe', app_name: 'cogibara-calendar-operator')
+    @calendar = Google::Calendar.new(username: self.operator_config["username"], password: self.operator_config["password"], app_name: 'cogibara-calendar-operator')
   end
 
   def process(message)
