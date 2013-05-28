@@ -53,7 +53,7 @@ def configure
   if @config_file
     load './' + @config_file.to_s
   else
-    load 'cogibara/default_config'
+    Cogibara.default_config
   end
   Cogibara.setup do |config|
     config.name = @name unless @name.nil?

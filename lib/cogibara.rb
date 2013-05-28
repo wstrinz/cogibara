@@ -1,4 +1,5 @@
 require "cogibara/version"
+require 'yaml'
 
 module Cogibara
   class << self
@@ -12,6 +13,11 @@ module Cogibara
 
     def config
       @config ||= Configuration.new
+    end
+
+    def default_config
+      # dispatcher.config_from_yaml(YAML.load_file('cogibara/default_config.yml'))
+      load 'cogibara/default_config.rb'
     end
 
     def dispatcher
