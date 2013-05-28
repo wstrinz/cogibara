@@ -1,0 +1,44 @@
+---
+name: cucumber
+speak: false
+hard_parse: true
+soft_parse: true
+modules:
+- module_name: chat
+  keywords: [talk,chat]
+  #Bot_ID: 24007
+  #
+- module_name: translate
+  keywords: translate
+  #
+- module_name: Wolfram Alpha
+  keywords: ask
+  file_name: wolfram_alpha
+  API_KEY: #YourAPIKey
+  #
+- module_name: Wiki
+  keywords: wiki
+  #
+- module_name: Maluuba
+  keywords: [maluuba, parse]
+  file_name: soft_parser
+  API_KEY: #YourAPIKey
+  #
+- module_name: Reminder Setter
+  keywords: REMINDER
+  #
+- module_name: Calendar
+  keywords: CALENDAR
+  username: #YourGmailName
+  password: #YourGmailPassword
+  #
+- module_name: Knowledge
+  keywords: KNOWLEDGE
+  WOLFRAM_KEY: #YourAPIKey
+  #
+- module_name: Weather
+  keywords: WEATHER
+  API_KEY: #YourAPIKey
+  #
+- module_name: Help
+  keywords: HELP
