@@ -10,7 +10,7 @@ class SoftParser < Cogibara::OperatorBase
     @client.normalize phrase: message, type: type, timezone:"CST"
   end
 
-  def normalize_msg!(msg, response)
+  def normalize_response!(msg, response)
     if response[:entities]
       if response[:entities][:daterange]
         n = normalize(msg, "daterange")[:entities][:daterange]
@@ -29,7 +29,7 @@ class SoftParser < Cogibara::OperatorBase
 
   def process(message)
     response = @client.interpret phrase: message.text
-    normalize_msg!(message.text, response)
+    normalize_response!(message.text, response)
     ## Should normalize times and do something with them
     # time_categories = [:REMINDER, :ALARM, :TIMER]
     # timerange_categories = [:TIMER]

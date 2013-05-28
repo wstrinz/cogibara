@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'speech2text'
 
   spec.add_dependency 'maluuba_napi2'
-
+  spec.add_dependency 'json', "~> 1.7.7"
   spec.add_dependency "cleverbot2"
   spec.add_dependency 'bing_translator'
   spec.add_dependency 'wikipedia-client'

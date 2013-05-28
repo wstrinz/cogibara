@@ -92,7 +92,7 @@ module Cogibara
     end
 
     def process_default(msg, obj)
-        chatmsg = Message.new(msg, obj.structure, obj.clientID)
+        chatmsg = Message.new(msg, obj.clientID, obj.structure)
         puts chatmsg.inspect if @verbose
         Cogibara::dispatcher.call("chat", chatmsg)
     end
@@ -114,7 +114,7 @@ module Cogibara
           puts "recognized instruction #{message.split[0]} (#{splitmsg})" if @verbose
           mod = splitmsg[0]
           splitmsg.shift
-          Cogibara::dispatcher.call(mod, Message.new(splitmsg.join(' '), obj.structure, obj.clientID))
+          Cogibara::dispatcher.call(mod, Message.new(splitmsg.join(' '), obj.clientID, obj.structure))
       else
         puts "didn't understand instruction #{message.split[0]}" if @verbose
         nil
