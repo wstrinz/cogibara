@@ -2,17 +2,6 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'cogibara/version'
-# require 'cogibara/message.rb'
-# require 'cogibara/configuration.rb'
-# require 'cogibara/file_handler.rb'
-# require 'cogibara/text_parser.rb'
-# require 'cogibara/message_handler.rb'
-# require 'cogibara/dispatcher.rb'
-# require 'cogibara/speaker.rb'
-# require 'cogibara/responder.rb'
-# require 'cogibara/transcriber.rb'
-# require 'cogibara/confirmer.rb'
-# require 'cogibara/operator_base.rb'
 
 Gem::Specification.new do |spec|
   spec.name          = "cogibara"
@@ -42,6 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sanitize'
   spec.add_dependency 'uuid'
   spec.add_dependency 'redis'
+  spec.add_dependency 'wikicloth'
   spec.add_dependency 'wolfram'
   spec.add_dependency 'google_calendar'
   spec.add_dependency 'forecast_io'
