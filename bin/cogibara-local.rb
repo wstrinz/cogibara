@@ -1,11 +1,9 @@
-require 'cogibara.rb'
-# require './config.rb'
+#!/usr/bin/env ruby
+require 'cogibara'
 require 'slop'
 
-
-
 def text(msg)
-  Cogibara::message_handler.handle(msg) #.text.to_s
+  Cogibara::message_handler.handle(msg)
 end
 
 
@@ -24,7 +22,6 @@ def text_or_file
 end
 
 def parse
-  # opts = Slop.parse(autocreate: true)
 
   opts = Slop.parse do
     on 'v', 'verbose', 'Verbose mode'
@@ -32,7 +29,6 @@ def parse
     on 'n=', 'name', 'Name'
     on 'c=', 'config', 'Configuration file'
   end
-  # puts opts
 
   @verbose = opts.verbose?
   @msg = opts[:message]

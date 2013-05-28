@@ -1,9 +1,8 @@
+#!/usr/bin/env ruby
+
 require 'cogibara'
 
 require 'redis'
-  # capy = CleverCapy.new
-  # capy.reply_mode = :redis
-  # capy.subscribeToRedis()
 @red = Redis.new
 
 Cogibara.setup do |config|
@@ -21,8 +20,6 @@ Redis.new.subscribe(:toCapy) do |on|
     text = @red.hmget("#{msg}",'text')
     @current_client = @red.hmget("#{msg}",'client')[0].to_i
     puts "message from #{@current_client}"
-    # puts file.length
-    # puts file[0]
     if file[0]
       puts "Handling as file "
       begin
@@ -32,11 +29,7 @@ Redis.new.subscribe(:toCapy) do |on|
       end
     elsif text[0]
       puts "Handling as text"
-      # begin
         Cogibara::message_handler.handle(Cogibara::Message.new(text[0],@current_client))
-      # rescue Exception
-        # puts "an error occured! " + ($!).to_s
-      # end
     end
   end
 end
