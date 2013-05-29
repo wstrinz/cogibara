@@ -24,6 +24,14 @@ Or install it yourself as:
 The gem will install two executables; `cogibara-local` and `cogibara-redis`. Both should run fine out of the box, but many functions require an API key or account credentials to work properly. See the Configuration section for more information.
     
 **Cogibara Local**  
+  
+  cogibara-local -m "hows it going?"
+    #=> cucumber: Good and you?
+
+  cogibara-local -c config.rb -m "what time is it in the netherlands?"
+    #=> cucumber: 7:30:40 am CEST  |  Wednesday, May 29, 2013
+
+
 The `cogibara-local` executable is a command line interface for the gem. 
     
     Usage: cogibara-local [options]
