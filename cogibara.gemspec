@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["wstrinz@gmail.com"]
   spec.description   = %q{Modular, extensible personal assistant}
   spec.summary       = %q{Modular, extensible personal assistant}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/wstrinz/cogibara"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
