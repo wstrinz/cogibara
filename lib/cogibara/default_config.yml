@@ -29,8 +29,8 @@ modules:
   #
 - module_name: Calendar
   keywords: CALENDAR
-  username: #YourGmailName
-  password: #YourGmailPassword
+  username: #YourGoogleName
+  password: #YourGooglePassword
   #
 - module_name: Knowledge
   keywords: KNOWLEDGE

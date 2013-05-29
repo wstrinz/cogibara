@@ -24,10 +24,10 @@ end
 def parse
 
   opts = Slop.parse do
-    on 'v', 'verbose', 'Verbose mode'
+    on 'v', 'verbose', 'Verbose output'
     on 'm=', 'message', 'Message'
     on 'n=', 'name', 'Name'
-    on 'c=', 'config', 'Configuration file'
+    on 'c=', 'config', 'Configuration file (.rb)'
   end
 
   @verbose = opts.verbose?
