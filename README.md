@@ -85,7 +85,7 @@ Although using the gem's configuration functions is more flexible, the simplest 
 
 `Cogibara::dispatcher.config_from_yaml(YAML.load_file('./some_file.yml'))`
 
-See here for an example which will set help you set up all of the built-in modules: https://gist.github.com/wstrinz/5666591
+See here for an example which will help you set up all of the built-in modules: https://gist.github.com/wstrinz/5666591
 
 ### Runtime Configuration
 
@@ -116,7 +116,7 @@ This project would not be possible without the awesome gems and APIs available f
 [speech2text gem](https://github.com/taf2/speech2text), by [Todd Fisher](https://github.com/taf)  
 [wolfram gem](https://github.com/cldwalker/wolfram), by [Gabriel Horner](https://github.com/cldwalker)  
 [Maluuba Natural Language API](http://dev.maluuba.com/), by [Maluuba Inc](http://www.maluuba.com/)  
-[maluuba_napi gem](https://github.com/Maluuba/napi-ruby/blob/master/maluuba_napi/lib/maluuba_napi.rb), by [Maluuba Inc](http://www.maluuba.com/)  
+[maluuba_napi gem](https://github.com/Maluuba/napi-ruby), by [Maluuba Inc](http://www.maluuba.com/)  
 [Forecastio API](https://developer.forecast.io/), by [Dark Sky Company](http://forecast.io/)  
 [forecast_io gem](https://github.com/darkskyapp/forecast-ruby), by [David Czarnecki](https://github.com/czarneckid)  
 [Cleverbot](http://www.cleverbot.com/)  
