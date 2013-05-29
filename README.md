@@ -1,9 +1,9 @@
 # Cogibara
     
-A friendly interface to your computer and the internet, leveraging the power of natural language processing techniques used in applications such as Siri! Why let your smartphone company decide what you need your personal assistant software to do? Cogibara uses free and open source software libraries and APIs to let you ask general knowledge or math questions, manage your calendar, or just chat when you're bored. It's easy ot add new capabilites or integrate other libraries; The gem handles the infrastructure and language processing so you can focus on making your Cogibara do whatever awesome things you want it to!
+Your friendly natural language interface to computer and the internet, leveraging the power of NLP techniques used in applications such as Siri! Why let your someone else decide what you need your personal assistant software to do? Cogibara uses free and open source libraries and APIs to let you ask general knowledge or math questions, manage your calendar, or just chat when you're bored. It's easy to add new capabilites or integrate other tools; The gem handles the infrastructure and language processing so you can focus on making your Cogibara do whatever awesome things you want it to!
 
 **NOTE**  
-This gem is still in development, there is no documentation besides this readme, I haven't written any tests, and important things may be implemented in breathtakingly stupid ways. Feel free to point out where this is so (I'd appreciate it in fact), but you've been warned. I was planning on keeping this private for a few more months of development, but other projects have come up for the summer, so I'm releasing what I have now in case I don't get much time to work on it.
+This gem is still in development, there is no documentation besides this readme, I haven't written any tests, and important things may be implemented in very silly ways. Feel free [tell me](https://github.com/wstrinz/cogibara/issues) where this is so (I'd appreciate it in fact), but you've been warned. I was planning on keeping this private for a few more months of development, however other projects have come up for the summer, so I'm releasing what I have now in case I don't get much time to work on it.
 
 ## Installation
 
