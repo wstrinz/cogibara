@@ -1,6 +1,5 @@
 # Cogibara
     
-  ---
 A friendly interface to your computer and the internet, leveraging the power of natural language processing techniques used in applications such as Siri! Why let your smartphone company decide what you need your personal assistant software to do? Cogibara uses free and open source software libraries and APIs to let you ask general knowledge or math questions, manage your calendar, or just chat when you're bored. It's easy ot add new capabilites or integrate other libraries; The gem handles the infrastructure and language processing so you can focus on making your Cogibara do whatever awesome things you want it to!
 
 **NOTE**  
@@ -42,7 +41,7 @@ The `cogibara-redis` executable uses redis to allow you to design your own inter
 
 For more on how to use this executable, see the example Rails client [here](https://github.com/wstrinz/cogibara-client).
 
-The demo client at [cogibara.com](www.cogibara.com/mobile/talk) is, at the time of writing, running both server and client on a Raspberry Pi sitting in my living room. 
+The demo client at [cogibara.com](http://goo.gl/7XOou) is, at the time of writing, running both server and client on a Raspberry Pi sitting in my living room. 
 
 **Gem API**  
 You can also use the gem as a part of any Ruby program
