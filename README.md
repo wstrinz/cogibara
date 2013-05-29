@@ -3,7 +3,7 @@
   ---
 A friendly interface to your computer and the internet, leveraging the power of natural language processing techniques used in applications such as Siri! Why let your smartphone company decide what you need your personal assistant software to do? Cogibara uses free and open source software libraries and APIs to let you ask general knowledge or math questions, manage your calendar, or just chat when you're bored. It's easy ot add new capabilites or integrate other libraries; The gem handles the infrastructure and language processing so you can focus on making your Cogibara do whatever awesome things you want it to!
 
-**NOTE**
+**NOTE**  
 This gem is still in development, there is no documentation besides this readme, I haven't written any tests, and important things may be implemented in breathtakingly stupid ways. Feel free to point out where this is so (I'd appreciate it in fact), but you've been warned. I was planning on keeping this private for a few more months of development, but other projects have come up for the summer, so I'm releasing what I have now in case I don't get much time to work on it.
 
 ## Installation
@@ -24,7 +24,7 @@ Or install it yourself as:
 
 The gem will install two executables; `cogibara-local` and `cogibara-redis`. Both should run fine out of the box, but many functions require an API key or account credentials to work properly. See the Configuration section for more information.
     
-**Cogibara Local**
+**Cogibara Local**  
 The `cogibara-local` executable is a command line interface for the gem. 
     
     Usage: cogibara-local [options]
@@ -37,14 +37,14 @@ If a message is specifed, the executable will print the response then exit. Othe
 
 You can also call `cogibara-local` on an audio or video file (less than 10 seconds seems to work best), and it will extract the speech from it using google's Speech To Text API, then pass the result to the gem.
 
-**Cogibara Redis**
+**Cogibara Redis**  
 The `cogibara-redis` executable uses redis to allow you to design your own interfaces for the gem. For now it requires a local redis server to be installed and running, but in the near future it will allow remote redis connections as well. This could also be used to split up the work of running the gem and serving the responses between computers, giving you the ability to install a lightweight interface on something like a Raspberry Pi and leave the heavy lifting to a desktop PC.
 
 For more on how to use this executable, see the example Rails client [here](https://github.com/wstrinz/cogibara-client).
 
 The demo client at [cogibara.com](www.cogibara.com/mobile/talk) is, at the time of writing, running both server and client on a Raspberry Pi sitting in my living room. 
 
-**Gem API**
+**Gem API**  
 You can also use the gem as a part of any Ruby program
 
     require 'cogibara'
