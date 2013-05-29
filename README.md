@@ -104,7 +104,7 @@ Explanation coming soon, see examples -
     require 'cogibara'
     Cogibara.setup do |config|
       config.name = "Mr Robot"
-      config.verbose = @verbose unless @verbose.nil?
+      config.verbose = true
     end
     Cogibara.setup_dispatcher do |dispatcher|
       dispatcher.register_operator(["REMINDER"],{name: "Reminder Setter"})
@@ -175,3 +175,16 @@ This project would not be possible without the awesome gems and APIs available f
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+**A few things I'll try to get in place in the next week**  
+-Fix file handling (will only do transcription for now)
+-An executable to listen on a local source (eg microphone). I have code for this from an earlier version of the gem, I just need to update it.
+-Add Speech to Text output to configuration. Again, I also have some work done on this, so it shouldn't take too long to add back in. Espeak will be the default, but you'll be able to specify alternate engines if they're available. Currently I'm rather partial to Pico.
+
+**Things that may have to wait/wishlist for contributions**  
+-RSpec tests
+-Documentation; RDocs would be nice, but pages for the wiki or more details for this document would also be good.
+-A better client to use by default. Preferably using a lighter weight framework such as Sinatra, and allowing easy access for mobile devices.
+-Find replacements for C Extensions; there are a lot of good language processing tools for Java, so it'd be nice for this gem to be JRuby compatible.
+-More offline operators. A simple request now often goes through 3 APIs; Google Speech Recognition, Maluuba's natural language processing, and whatever keyword function it hits after that. By adding support for [PocketSphinx](http://cmusphinx.sourceforge.net/2010/03/pocketsphinx-0-6-release/) and/or something link [LingPipe](http://alias-i.com/lingpipe/) would speed up response times enormously.
+-More operators in general, and improve the current ones. For example, the weather operator only gives current conditions and the days forecast, but it could easily be extended to handle more specific queries using the information extracted by Maluuba.
