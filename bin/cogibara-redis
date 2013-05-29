@@ -6,14 +6,14 @@ require 'redis'
 @red = Redis.new
 
 Cogibara.setup do |config|
-  config.name = "cucumber"
+  config.name = "cogibara"
 end
 
 if ARGV[0]
   load "./#{ARGV[0]}"
 else
   Cogibara.default_config
-end
+end 
 
 Redis.new.subscribe(:toCapy) do |on|
   on.message do |channel, msg|

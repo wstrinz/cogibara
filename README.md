@@ -26,10 +26,10 @@ The gem will install two executables; `cogibara-local` and `cogibara-redis`. Bot
 **Cogibara Local**  
   
     cogibara-local -m "hows it going?"
-      #=> cucumber: Good and you?
+      #=> cogibara: Good and you?
 
     cogibara-local -c config.rb -m "what time is it in the netherlands?"
-      #=> cucumber: 7:30:40 am CEST  |  Wednesday, May 29, 2013
+      #=> cogibara: 7:30:40 am CEST  |  Wednesday, May 29, 2013
 
 
 The `cogibara-local` executable is a command line interface for the gem. 

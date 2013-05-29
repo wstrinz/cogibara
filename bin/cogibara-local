@@ -32,18 +32,18 @@ def parse
 
   @verbose = opts.verbose?
   @msg = opts[:message]
-  @name = opts[:name] || "cucumber"
+  @name = opts[:name] || "cogibara"
   @config_file = opts[:config]
 
   if !@msg
     if @config_file
       @verbose = false
-      @name = "cucumber"
+      @name = "cogibara"
       configure
       text_loop
     else
       @msg = ARGV.join(' ')
-      @name = "cucumber"
+      @name = "cogibara"
       @verbose = false
     end
   end
