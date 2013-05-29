@@ -109,6 +109,42 @@ Explanation coming soon, see examples -
       dispatcher.register_operator(["chat"],{name: "Chat Bot", class_name:  "Chat", file_name: "chat.rb"})
     end
 
+## Extending
+
+It's easy to add new functionality to your Cogibara, just add a `process(message)` method to your code, and add your class or file to the list of modules using `Cogibara::dispatcher.register_operator`. You can also extend the `Cogibara::OperatorBase` class, which will allow you to utilize some built in helper methods for things like sending multiple messages and handling confirmation callbacks.
+
+Your operator must be bound to a list of keywords or natural language categories. The Maluuba Natural Speech API, which the gem current uses for language processing, places speech into a number of different categories and extracts information such as dates and times. You can bind your operator to any category, or to any individual 'action' in a category, then handle queries and the structured information Maluuba extracts in whatver way you need to.
+
+Cogibara can recognize both individual keywords and categories of natural speech. Keyword queries are of the form "[name] [keyword] message", and natural language queries can be hooked into using the [categories](http://dev.maluuba.com/categories) for the Maluuba API. To add a new module, either from a file or an existing Class object, simply call `Cogibara::dispatcher.register_operator(['keyword','list'],{name: "Operator Name"})`, which will attempt to load the operator based on standard Ruby naming conventions. In this case, it will be looking for a `operator_name.rb` file, or a class object called `OperatorName`. By specifying `class_name` or `file_name` options, you can override this behavior to define your own custom naming.
+
+As an example, here's how you might go about adding an operator that tells you your current location:
+
+    require 'cogibara'
+    require 'geocoder'
+    require 'json'
+    require 'open-uri'
+    class Locator < Cogibara::OperatorBase
+      def process(message)
+        ip = 0
+        open( 'http://jsonip.com/ ' ){ |s| ip = JSON::parse( s.string())['ip'] }
+        loc = Geocoder.search(ip)
+        "You are in #{loc[0].city}, #{loc[0].state}!"
+      end
+    end
+
+    Cogibara.default_config
+
+    # Register operator under the 'where am I?' Maluuba speech category, and the 'location' keyword.
+    Cogibara::dispatcher.register_operator(['NAVIGATION_WHERE_AM_I', 'location'], {name: 'Locator'})
+    
+    # natural language query
+    Cogibara::message_handler.handle("so where am I now?")
+      #=> "You are in Madison, Wisconsin!"
+    
+    # keyword query
+    Cogibara::message_handler.handle("cogibara location")
+      #=> "You are in Madison, Wisconsin!"
+
 ## Credit
 
 This project would not be possible without the awesome gems and APIs available for free online. Here is a list of all the built in services, please let me know if I'm missing someone or you'd like your gem or service to be removed from this project.
