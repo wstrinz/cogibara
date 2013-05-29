@@ -70,6 +70,7 @@ module Cogibara
 
     def process_core(message, obj)
       @yourname = "person"
+      message = message.chomp
       if message == "hey #{@name}"
         "what's up #{@yourname}?"
       elsif message == "reset mode"
