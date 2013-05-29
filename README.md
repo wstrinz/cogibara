@@ -63,9 +63,9 @@ More details coming soon.
 
 Many operators require an API key to communicate with a remote service. The gems for the individual operators will have better documentation, but here's where you can get a key for the built-in modules:  
 
-Wolfram Alpha ([gem](https://github.com/cldwalker/wolfram)): http://developer.wolframalpha.com/portal/apisignup.html
-Maluuba ([gem](https://github.com/Maluuba/napi-ruby/blob/master/maluuba_napi/lib/maluuba_napi.rb)): http://dev.maluuba.com/
-Forecast_IO ([gem](https://github.com/darkskyapp/forecast-ruby)): https://developer.forecast.io/
+Wolfram Alpha ([gem](https://github.com/cldwalker/wolfram)): http://developer.wolframalpha.com/portal/apisignup.html  
+Maluuba ([gem](https://github.com/Maluuba/napi-ruby/blob/master/maluuba_napi/lib/maluuba_napi.rb)): http://dev.maluuba.com/  
+Forecast_IO ([gem](https://github.com/darkskyapp/forecast-ruby)): https://developer.forecast.io/  
 
 ## Configuration
 
