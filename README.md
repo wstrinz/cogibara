@@ -91,7 +91,7 @@ See here for an example which will help you set up all of the built-in modules: 
 
 You can call to `Cogibara::config` to fetch or update your configuration, and `Cogibara::dispatcher` to add new external operators using the following syntax: 
 
-    Cogibara::dispatcher.register_operator([mod_keywords], {name: mod_name,         file_name: mod_file, class_name: mod_class_name, config: mod})
+    Cogibara::dispatcher.register_operator([mod_keywords], {name: mod_name, file_name: mod_file, class_name: mod_class_name, config: mod})
 
 If you do not provide an option, the dispatcher will attempt to fill it in based on the other options and various naming conventions.
 
