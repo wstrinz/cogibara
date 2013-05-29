@@ -25,41 +25,33 @@ module Cogibara
     def register_operator(keywords, options)
       mod_keywords = keywords
       mod_name = options[:name] || keywords[0]
-      mod_file = options[:file_name] ? options[:file_name] : module_name.downcase.gsub(' ','_')
+      mod_file = options[:file_name] ? options[:file_name] : mod_name.downcase.gsub(' ','_')
       mod_class_name = options[:class_name] ? options[:class_name] : mod_file.split('_').map{ |w| w.capitalize }.join
       mod_file += ".rb"
       loc = File.expand_path(File.dirname(__FILE__))
-      if File.exists?("#{loc}/operators/#{mod_file}")
-        require "#{loc}/operators/#{mod_file}"
-        if Object.const_defined?(mod_class_name)
-          mod_class = eval(mod_class_name) ## TODO prooooooobably should do this a different way
-          unless (mod_class.method_defined?("process") || mod_class.method_defined?("process_file"))
-            puts "process method missing for #{mod_class.to_s} in #{mod_name}"
-          else
-            # puts "LOADED module #{mod_name} \n\t keywords: #{mod_keywords}" if Cogibara::config.verbose
-            operator_options[mod_class] = options[:config] || {}
-            # mod_instance = mod_class.new()
-            # mod_instance.operator_config = options[:config] if options[:config]
-          end
-          if mod_class.method_defined?("process")
-            # puts "LOADED module #{mod_name} \n\t keywords: #{mod_keywords}"
-            mod_keywords.each do |kw|
-              operators[kw] = mod_class
-            end
-          end
-          if mod_class.method_defined?("process_file")
-            # puts "LOADED module #{mod_name} \n\t keywords: #{mod_keywords}"
-            mod_keywords.each do |kw|
-              file_operators[kw] = mod_class
-            end
-            # puts file_operators
-          end
+      require "#{loc}/operators/#{mod_file}" if File.exists?("#{loc}/operators/#{mod_file}")
+
+      if Object.const_defined?(mod_class_name)
+        mod_class = eval(mod_class_name) ## TODO prooooooobably should do this a different way
+        unless (mod_class.method_defined?("process") || mod_class.method_defined?("process_file"))
+          puts "process method missing for #{mod_class.to_s} in #{mod_name}"
         else
-          puts "main class: #{mod_class_name} not defined for module #{mod_name}"
+          operator_options[mod_class] = options[:config] || {}
+        end
+        if mod_class.method_defined?("process")
+          mod_keywords.each do |kw|
+            operators[kw] = mod_class
+          end
+        end
+        if mod_class.method_defined?("process_file")
+          mod_keywords.each do |kw|
+            file_operators[kw] = mod_class
+          end
         end
       else
-        puts "file: #{loc}/operators/#{mod_file} for module #{mod_name} does not exist, skipping load"
+        puts "main class: #{mod_class_name} not defined for module #{mod_name}"
       end
+      puts "file: #{loc}/operators/#{mod_file} for module #{mod_name} does not exist, skipping load" if options[:file_name] && !File.exists?("#{loc}/operators/#{mod_file}")
     end
 
 
