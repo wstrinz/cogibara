@@ -106,22 +106,22 @@ Explanation coming soon, see examples -
 
 This project would not be possible without the awesome gems and APIs available for free online. Here is a list of all the built in services, please let me know if I'm missing someone or you'd like your gem or service to be removed from this project.
 
-[speech2text gem](https://github.com/taf2/speech2text), by [Todd Fisher](https://github.com/taf)
-[wolfram gem](https://github.com/cldwalker/wolfram), by [Gabriel Horner](https://github.com/cldwalker)
-[Maluuba Natural Language API](http://dev.maluuba.com/), by [Maluuba Inc](http://www.maluuba.com/)
-[maluuba_napi gem](https://github.com/Maluuba/napi-ruby/blob/master/maluuba_napi/lib/maluuba_napi.rb), by [Maluuba Inc](http://www.maluuba.com/)
-[Forecastio API](https://developer.forecast.io/), by [Dark Sky Company](http://forecast.io/)
-[forecast_io gem](https://github.com/darkskyapp/forecast-ruby), by [David Czarnecki](https://github.com/czarneckid)
-[Cleverbot](http://www.cleverbot.com/)
-[cleverbot gem](https://github.com/benmanns/cleverbot), by [Benjamin Manns](https://github.com/benmanns)
-[bing_translator gem](https://github.com/CodeBlock/bing_translator-gem), by [Ricky Elrod](https://github.com/CodeBlock)
-[wikipedia-client gem](https://github.com/kenpratt/wikipedia-client), by [Ken Pratt](https://github.com/kenpratt)
-[sanitize gem](https://github.com/rgrove/sanitize), by [Ryan Grove](https://github.com/rgrove)
-[Redis](http://redis.io/)
-[wikicloth gem](https://github.com/nricciar/wikicloth), by [David Ricciardi](https://github.com/nricciar/wikicloth)
-[google_calendar gem](https://github.com/northworld/google_calendar), by [Northworld LLC](http://www.northworld.com/)
-[geocoder gem](https://github.com/alexreisner/geocoder), by [Alex Reisner](http://www.alexreisner.com/)
-[slop gem](https://github.com/injekt/slop), by [Lee Jarvis](https://github.com/injekt)
+[speech2text gem](https://github.com/taf2/speech2text), by [Todd Fisher](https://github.com/taf)  
+[wolfram gem](https://github.com/cldwalker/wolfram), by [Gabriel Horner](https://github.com/cldwalker)  
+[Maluuba Natural Language API](http://dev.maluuba.com/), by [Maluuba Inc](http://www.maluuba.com/)  
+[maluuba_napi gem](https://github.com/Maluuba/napi-ruby/blob/master/maluuba_napi/lib/maluuba_napi.rb), by [Maluuba Inc](http://www.maluuba.com/)  
+[Forecastio API](https://developer.forecast.io/), by [Dark Sky Company](http://forecast.io/)  
+[forecast_io gem](https://github.com/darkskyapp/forecast-ruby), by [David Czarnecki](https://github.com/czarneckid)  
+[Cleverbot](http://www.cleverbot.com/)  
+[cleverbot gem](https://github.com/benmanns/cleverbot), by [Benjamin Manns](https://github.com/benmanns)  
+[bing_translator gem](https://github.com/CodeBlock/bing_translator-gem), by [Ricky Elrod](https://github.com/CodeBlock)  
+[wikipedia-client gem](https://github.com/kenpratt/wikipedia-client), by [Ken Pratt](https://github.com/kenpratt)  
+[sanitize gem](https://github.com/rgrove/sanitize), by [Ryan Grove](https://github.com/rgrove)  
+[Redis](http://redis.io/)  
+[wikicloth gem](https://github.com/nricciar/wikicloth), by [David Ricciardi](https://github.com/nricciar/wikicloth)  
+[google_calendar gem](https://github.com/northworld/google_calendar), by [Northworld LLC](http://www.northworld.com/)  
+[geocoder gem](https://github.com/alexreisner/geocoder), by [Alex Reisner](http://www.alexreisner.com/)  
+[slop gem](https://github.com/injekt/slop), by [Lee Jarvis](https://github.com/injekt)  
 
 ## Contributing
 
