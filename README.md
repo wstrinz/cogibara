@@ -23,14 +23,27 @@ Or install it yourself as:
 
 ## Usage
 
-The gem will install two executables; `cogibara-local` and `cogibara-redis`. Both should run fine out of the box, but many functions require an API key or account credentials to work properly. See the Configuration section for more information.
+**Gem API**  
+You can use the gem as a part of any Ruby program
+
+    require 'cogibara'
+    Cogibara::dispatcher.config_from_yaml('./config.yml')
+    Cogibara::message_handler.handle("hello!") 
+        # => "How Are you?"
+    Cogibara::message_handler.handle("what is the square root of 9954") 
+        #=> "3 sqrt(1106)" 
+    Cogibara::message_handler.handle("how's the weather?")
+        #=> "Currently Overcast, 65 degrees, cloud cover 99%, then 
+            Sprinkling for the hour." 
+
+
+**Executable**  
+The gem will install the `cogibara` executable. You can run it without arguments for to get to a basic interactive loop, but many functions require an API key or account credentials to work properly. See the Configuration section for more information.
     
-**Cogibara Local**  
-  
-    cogibara-local -m "hows it going?"
+    cogibara -m "hows it going?"
       #=> cogibara: Good and you?
 
-    cogibara-local -c config.rb -m "what time is it in the netherlands?"
+    cogibara -c config.rb -m "what time is it in the netherlands?"
       #=> cogibara: 7:30:40 am CEST  |  Wednesday, May 29, 2013
 
 
@@ -40,32 +53,22 @@ The `cogibara-local` executable is a command line interface for the gem.
     -v, --verbose      Verbose output
     -m, --message      Message
     -n, --name         Name
-    -c, --config       Configuration file (.rb)
+    -c, --config       Configuration file (.yml or .rb)
+    -r, --Redis        Standalone Redis mode
+
 
 If a message is specifed, the executable will print the response then exit. Otherwise, it will go into a loop until you close it.
 
-You can also call `cogibara-local` on an audio or video file (less than 10 seconds seems to work best), and it will extract the speech from it using google's Speech To Text API, then pass the result to the gem.
+You can also run `cogibara` on a yaml or Ruby file to start the interactive loop using the configuration it specifies, or on an audio or video file (less than 10 seconds seems to work best), in which case it will extract the speech from it using google's Speech To Text API, then pass the result to the gem.
 
 **Cogibara Redis**  
-The `cogibara-redis` executable uses redis to allow you to design your own interfaces for the gem. For now it requires a local redis server to be installed and running, but in the near future it will allow remote redis connections as well. This could also be used to split up the work of running the gem and serving the responses between computers, giving you the ability to install a lightweight interface on something like a Raspberry Pi and leave the heavy lifting to a desktop PC.
+Running `cogibara -r` uses redis to allow you to design your own interfaces for the gem. For now it requires a local redis server to be installed and running, so its probably better just to use the gem in your program, but in the near future it will allow remote redis connections as well. This could also be used to split up the work of running the gem and serving the responses between computers, giving you the ability to install a lightweight interface on something like a Raspberry Pi and leave the heavy lifting to a desktop PC.
 
 For more on how to use this executable, see the example Rails client [here](https://github.com/wstrinz/cogibara-client).
 
 The demo client at [cogibara.com](http://goo.gl/7XOou) is, at the time of writing, running both server and client on a Raspberry Pi sitting in my living room. 
 
-**Gem API**  
-You can also use the gem as a part of any Ruby program
 
-    require 'cogibara'
-    require 'yaml'
-    Cogibara::dispatcher.config_from_yaml(YAML.load_file('./config.yml'))
-    Cogibara::message_handler.handle("hello!") 
-        # => "How Are you?"
-    Cogibara::message_handler.handle("what is the square root of 9954") 
-        #=> "3 sqrt(1106)" 
-    Cogibara::message_handler.handle("how's the weather?")
-        #=> "Currently Overcast, 65 degrees, cloud cover 99%, then 
-            Sprinkling for the hour." 
 
 More details coming soon.
 
@@ -85,9 +88,9 @@ You have three options for configuring the gem; using a YAML file, modifying the
 
 Although using the gem's configuration functions is more flexible, the simplest way to get everything working is to configure the gem using YAML. This can be accomplished by calling
 
-`Cogibara::dispatcher.config_from_yaml(YAML.load_file('./some_file.yml'))`
+`Cogibara::dispatcher.config_from_yaml('./some_file.yml')`
 
-See here for an example which will help you set up all of the built-in modules: https://gist.github.com/wstrinz/5666591
+See here for an example yaml file which will help you set up all of the built-in modules: https://gist.github.com/wstrinz/5666591
 
 ### Runtime Configuration
 
@@ -179,7 +182,7 @@ This project would not be possible without the awesome gems and APIs available f
 **A few things I'll try to get in place in the next week**  
 -Fix file handling (will only do transcription for now)  
 -An executable to listen on a local source (eg microphone). I have code for this from an earlier version of the gem, I just need to update it.  
--Add Speech to Text output to configuration. Again, I also have some work done on this, so it shouldn't take too long to add back in. Espeak will be the default, but you'll be able to specify alternate engines if they're available. Currently I'm rather partial to Pico.  
+-Add Text to Speech output to configuration. Again, I also have some work done on this, so it shouldn't take too long to add back in. Espeak will be the default, but you'll be able to specify alternate engines if they're available. Currently I'm rather partial to Pico.  
 
 **Things that may have to wait/wishlist for contributions**  
 -RSpec tests  
