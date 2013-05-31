@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Cogibara::VERSION
   spec.authors       = ["wstrinz"]
   spec.email         = ["wstrinz@gmail.com"]
-  spec.description   = %q{Modular, extensible personal assistant}
+  spec.description   = %q{A framework for combining natural speech processing tools with public APIs. Basic functions work out of the box, and with a bit of configuration you can get weather information, manage your google calendar, or access wolfram alpha, all using your voice or natural language text. If you want more functionality, it's easy to associate your own code with a keyword or speech category. Try the demo interface by tweeting @Cogibara}
   spec.summary       = %q{Modular, extensible personal assistant}
   spec.homepage      = "https://github.com/wstrinz/cogibara"
   spec.license       = "MIT"
