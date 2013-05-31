@@ -15,7 +15,8 @@ def text_loop
 end
 
 def text_or_file
-  if File.exist?("./#{@msg}")
+  puts @config_file
+  if !@config_file && File.exist?("./#{@msg}")
     Cogibara::file_handler.handle(File.open("./#{ARGV[0]}",'rb').read, "local")
   else
     text(@msg)
@@ -41,12 +42,14 @@ def parse
   if !@msg
     if @config_file
       @verbose = false
-      @name = "cogibara"
       configure
       text_loop
     else
       @msg = ARGV.join(' ')
-      @name = "cogibara"
+      if File.exist?("./#{@msg}")
+        ext = @msg.to_s.split('.').last
+        @config_file = @msg if %w(yml rb).include? ext
+      end
       @verbose = false
     end
   end
@@ -54,9 +57,9 @@ end
 
 def configure
   if @config_file
-    ext = @config_file.to_s.split['.'].last
-    if ext == '.yml'
-      Cogibara::dispatcher_config_from_yaml(@config_file.to_s)
+    ext = @config_file.to_s.split('.').last
+    if ext == 'yml'
+      Cogibara::dispatcher.config_from_yaml(@config_file.to_s)
     else
       load './' + @config_file.to_s 
     end
@@ -101,4 +104,4 @@ configure
 
 standalone_redis if @redis_mode
 
-ARGV[0] ? text_or_file : text_loop
+ARGV[0] && (@msg != @config_file) ? text_or_file : text_loop
