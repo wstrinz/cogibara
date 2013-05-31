@@ -54,7 +54,7 @@ The `cogibara-local` executable is a command line interface for the gem.
     -m, --message      Message
     -n, --name         Name
     -c, --config       Configuration file (.yml or .rb)
-    -r, --Redis        Standalone Redis mode
+    -r, --redis        Standalone Redis mode
 
 
 If a message is specifed, the executable will print the response then exit. Otherwise, it will go into a loop until you close it.
