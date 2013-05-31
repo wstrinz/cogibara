@@ -32,22 +32,8 @@ class Knowledge < Cogibara::OperatorBase
           msg += ", " + recognized.map{|x| x + ": " + result[:pods][x][0].to_s}.join(", ")
         end
       end
-      # else
-      #   valid_result == false
-      # if result[:pods]["Result"] || result[:pods]["Exact result"] || result[:pods]["Basic information"]
-      #   if result[:pods]["Result"]
-      #     msg = result[:pods]["Result"][0]
-      #   elsif result[:pods]["Exact result"]
-      #     msg = result[:pods]["Exact result"][0]
-      #   elsif result[:pods]["Basic information"]
-      #     msg = result[:pods]["Basic information"][0]
-      #   end
-      # end
-      # valid_result = !(!result[:pods]["Result"] || result[:pods]["Result"][0] == "(data not available)")
     end
 
     valid_result ? msg : nil
-    
-    # valid_result ? result[:pods]["Result"][0] : @cleverbot.write(query.text)
   end
 end

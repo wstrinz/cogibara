@@ -78,7 +78,6 @@ def standalone_redis
   @red = Redis.new
   Redis.new.subscribe(:toCapy) do |on|
     on.message do |channel, msg|
-      # puts msg
       file = @red.hmget("#{msg}",'file')
       text = @red.hmget("#{msg}",'text')
       client = @red.hmget("#{msg}",'client')[0].to_i
