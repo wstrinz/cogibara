@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'cogibara'
 require 'slop'
+require 'redis'
 
 def text(msg)
   Cogibara::message_handler.handle(msg)
@@ -28,12 +29,14 @@ def parse
     on 'm=', 'message', 'Message'
     on 'n=', 'name', 'Name'
     on 'c=', 'config', 'Configuration file (.rb)'
+    on 'r', 'redis', 'Standalone Redis mode'
   end
 
   @verbose = opts.verbose?
   @msg = opts[:message]
   @name = opts[:name] || "cogibara"
   @config_file = opts[:config]
+  @redis_mode = opts[:redis]
 
   if !@msg
     if @config_file
@@ -51,7 +54,12 @@ end
 
 def configure
   if @config_file
-    load './' + @config_file.to_s
+    ext = @config_file.to_s.split['.'].last
+    if ext == '.yml'
+      Cogibara::dispatcher_config_from_yaml(@config_file.to_s)
+    else
+      load './' + @config_file.to_s 
+    end
   else
     Cogibara.default_config
   end
@@ -63,8 +71,34 @@ def configure
   end
 end
 
+def standalone_redis
+  @red = Redis.new
+  Redis.new.subscribe(:toCapy) do |on|
+    on.message do |channel, msg|
+      # puts msg
+      file = @red.hmget("#{msg}",'file')
+      text = @red.hmget("#{msg}",'text')
+      client = @red.hmget("#{msg}",'client')[0].to_i
+      puts "message from #{client}"
+      if file[0]
+        puts "Handling as file "
+        begin
+          Cogibara::FileHandler.new.handle(file[0], client)
+        rescue Exception
+          puts "an error occured! " + ($!).to_s
+        end
+      elsif text[0]
+        puts "Handling as text"
+          Cogibara::message_handler.handle(Cogibara::Message.new(text[0],client))
+      end
+    end
+  end
+end
+
 parse
 
 configure
+
+standalone_redis if @redis_mode
 
 ARGV[0] ? text_or_file : text_loop

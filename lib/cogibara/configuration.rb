@@ -5,7 +5,7 @@ module Cogibara
 
     def defaults
       {
-        name: "cucumber",
+        name: "cogibara",
         speak: false,
         text: true,
         hard_parse: true,

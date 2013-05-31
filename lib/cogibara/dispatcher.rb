@@ -1,3 +1,4 @@
+require 'yaml'
 module Cogibara
   class Dispatcher
     def operators
@@ -97,8 +98,8 @@ module Cogibara
       file_operators.has_key?(keyword)
     end
 
-    def config_from_yaml(file)
-      yml = file
+    def config_from_yaml(yml)
+      yml = YAML.load_file(yml) if yml.is_a? String
       yml["modules"].each do |mod|
         mod_name = mod["module_name"]
         mod_keywords = mod["keywords"]
