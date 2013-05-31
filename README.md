@@ -62,7 +62,7 @@ If a message is specifed, the executable will print the response then exit. Othe
 You can also run `cogibara` on a yaml or Ruby file to start the interactive loop using the configuration it specifies, or on an audio or video file (less than 10 seconds seems to work best), in which case it will extract the speech from it using google's Speech To Text API, then pass the result to the gem.
 
 **Cogibara Redis**  
-Running `cogibara -r` uses redis to allow you to design your own interfaces for the gem. For now it requires a local redis server to be installed and running, so its probably better just to use the gem in your program, but in the near future it will allow remote redis connections as well. This could also be used to split up the work of running the gem and serving the responses between computers, giving you the ability to install a lightweight interface on something like a Raspberry Pi and leave the heavy lifting to a desktop PC.
+Running `cogibara` with the `-r` flag will start the stand-alone Redis client, allowing you to design your own interfaces for the gem. For now it requires a local Redis server to be installed and running, so its probably better just to use the gem in your program, but in the near future it will allow remote Redis connections as well. This could also be used to split up the work of running the gem and serving the responses between computers, giving you the ability to install a lightweight interface on something like a Raspberry Pi and leave the heavy lifting to a desktop PC.
 
 For more on how to use this executable, see the example Rails client [here](https://github.com/wstrinz/cogibara-client).
 
