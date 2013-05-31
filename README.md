@@ -1,6 +1,6 @@
 # Cogibara
     
-Your friendly natural language interface to computer and the internet, leveraging the power of NLP techniques used in applications such as Siri! Why let your someone else decide what you need your personal assistant software to do? Cogibara uses free and open source libraries and APIs to let you ask general knowledge or math questions, manage your calendar, or just chat when you're bored. It's easy to add new capabilites or integrate other tools; The gem handles the infrastructure and language processing so you can focus on making your Cogibara do whatever awesome things you want it to.
+Your friendly natural language interface to computer and the internet, leveraging the power of NLP techniques used in applications such as Siri! Why let your someone else decide what you need your personal assistant software to do? Cogibara uses free and open source libraries and APIs to let you ask general knowledge or math questions, manage your calendar, or just chat when you're bored. It's easy to add new capabilites or integrate other tools; the gem handles the infrastructure and language processing so you can focus on making your Cogibara do whatever awesome things you want it to.
 
 For a demo, try tweeting [@Cogibara](https://twitter.com/cogibara), or check out the [demo client](http://goo.gl/7XOou) and its [github page](https://github.com/wstrinz/cogibara-client). Its just something I put together with ExtJS and Rails, so it's got some bugs at the moment, but it should give you an idea of what the gem can do.
 
