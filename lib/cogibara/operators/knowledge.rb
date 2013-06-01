@@ -4,7 +4,8 @@ require 'wolfram'
 
 class Knowledge < Cogibara::OperatorBase
 
-  PODS = %w(Result Exact\ result Basic\ information Decimal\ approximation)
+  PODS = ["Result", "Basic information", "Exact result", "Decimal approximation", "Properties"]
+  QWORDS = %w{who what why where when how are can if what's}
 
   def initialize_operator
     Wolfram.appid = self.operator_config["WOLFRAM_KEY"]
@@ -13,8 +14,7 @@ class Knowledge < Cogibara::OperatorBase
   end
 
   def is_question_word?(word)
-    qwords = %w{who what why where when how are can if}
-    qwords.include? word.downcase
+    QWORDS.include? word.downcase
   end
 
   def process(query)

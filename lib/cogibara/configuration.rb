@@ -17,6 +17,14 @@ module Cogibara
       }
     end
 
+    def speech_engine=(speech_engine)
+     @speech_engine = speech_engine
+    end
+
+    def speech_engine
+      @speech_engine.nil? ? defaults[:speech_engine] : @speech_engine
+    end
+
     def name=(name)
      @name = name
     end

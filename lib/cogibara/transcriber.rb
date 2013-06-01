@@ -17,7 +17,7 @@ module Cogibara
       begin
         result = Speech::AudioToText.new(filestring).to_json #(2, "en-US")
       rescue
-        remove_temp_file
+        remove_temp_file filestring
         raise
       end
       remove_temp_file filestring

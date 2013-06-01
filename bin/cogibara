@@ -13,6 +13,18 @@ class Listener
     volume > threshold ? z : nil
   end
 
+  def play_sound(type)
+    dir = Gem::Specification.find_by_name("cogibara").gem_dir
+    case type
+    when :start
+      `aplay #{dir}/audio/tweetle1.wav`
+    when :listen
+      `aplay #{dir}/audio/short_tweetle.wav`
+    when :wake
+      `aplay #{dir}/audio/tweetle2.wav`
+    end
+  end
+
   def speak(message)
     # engine = Cogibara::config.speech_engine
     # voice = Cogibara::config.voice
@@ -30,14 +42,16 @@ class Listener
   end
 
   def sleep_mode
+    puts "sleeping"
     loop do
-      puts "sleeping"
       audio = nil
       until audio
-        audio = record(3,0.3)
+        audio = record(3,0.2)
       end
       begin
         @transcriber.transcribe(audio)
+        play_sound(:wake)
+        puts "waking up"
         return
       rescue
 
@@ -47,32 +61,42 @@ class Listener
 
   def get_message(tries=3)
     #should play a sound
+    play_sound(:listen)
     puts "listening!"
     loop do
-      audio = record(@basedur)
-      audio = record(@basedur) unless audio
+      tries.times do
+        audio = record(@basedur)
+        audio = record(@basedur) unless audio
 
-      unless audio
-        sleep_mode 
-      else
-        #play a sound as well
-        puts "Processing"
+        unless audio
+          sleep_mode 
+        else
+          #play a sound as well
+          puts "Processing"
 
-        msg = nil
-        begin
-          msg = @transcriber.transcribe(audio)
-          return msg
-        rescue Exception
-          puts "failed to transcribe  (#{$!})"
+          msg = nil
+          begin
+            msg = @transcriber.transcribe(audio)
+            if msg.chomp == "quit"
+              exit!
+            elsif msg.chomp == "sleep"
+              break
+            else 
+                return msg
+            end
+          rescue Exception
+            puts "failed to transcribe  (#{$!})"
+          end
         end
       end
+      sleep_mode
     end
     speak("Sorry, I couldn't understand you")
   end
 
   def ask_once
     message = get_message
-    puts message
+    puts "you: " +  message
     answer = ""
     if message
       answer = Cogibara::message_handler.handle(message)
@@ -107,7 +131,6 @@ def text_loop
 end
 
 def text_or_file
-  puts @config_file
   if !@config_file && File.exist?("./#{@msg}")
     Cogibara::file_handler.handle(File.open("./#{ARGV[0]}",'rb').read, "local")
   else
@@ -139,11 +162,12 @@ def parse
   @config_file = opts[:config]
   @redis_mode = opts[:redis]
   @audio = opts[:audio]
-  @looped_audio = !@audio && opts[:looped_audio]
+  @looped_audio = !@audio && opts[:l]
 
   if !@msg
     if @config_file
       @verbose = false
+      @do_loop = true
     else
       @msg = ARGV.join(' ')
       if File.exist?("./#{@msg}")
@@ -159,7 +183,7 @@ def configure
   if @config_file
     ext = @config_file.to_s.split('.').last
     if ext == 'yml'
-      Cogibara::dispatcher.config_from_yaml(@config_file.to_s)
+      Cogibara.config_from_yaml(@config_file.to_s)
     else
       load './' + @config_file.to_s 
     end
@@ -204,11 +228,14 @@ configure
 
 standalone_redis if @redis_mode
 
+@listener = Listener.new
 if @audio
-  Listener.new.ask_once
+  @listener.play_sound(:start)
+  puts @listener.ask_once
 elsif @looped_audio
-  Listener.new.ask_loop if @looped_audio
-elsif ARGV[0] && (@msg != @config_file)
+  @listener.play_sound(:start)
+  @listener.ask_loop if @looped_audio
+elsif !@do_loop && ARGV[0] && (@msg != @config_file)
   text_or_file
 else
   text_loop

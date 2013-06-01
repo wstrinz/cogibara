@@ -58,6 +58,9 @@ module Cogibara
       speaker.speak_to_local(message)
     end
 
+    def config_from_yaml(yml)
+      dispatcher.config_from_yaml(yml)
+    end
     # def config[entry]
     #   @config ? @config.config[entry] : nil
     # end
