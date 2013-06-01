@@ -100,6 +100,10 @@ module Cogibara
 
     def config_from_yaml(yml)
       yml = YAML.load_file(yml) if yml.is_a? String
+      Cogibara::config.name = yml["name"] if yml["name"]
+      Cogibara::config.speak = yml["speak"] if yml["speak"]
+      Cogibara::config.hard_parse = yml["hard_parse"] if yml["hard_parse"]
+      Cogibara::config.soft_parse = yml["soft_parse"] if yml["soft_parse"]
       yml["modules"].each do |mod|
         mod_name = mod["module_name"]
         mod_keywords = mod["keywords"]

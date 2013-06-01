@@ -188,13 +188,12 @@ def configure
       load './' + @config_file.to_s 
     end
   else
-    Cogibara.default_config
-  end
-  Cogibara.setup do |config|
-    config.name = @name unless @name.nil?
-    config.local = true
-    config.use_redis = false
-    config.verbose = @verbose unless @verbose.nil?
+    Cogibara.setup do |config|
+      config.name = @name unless @name.nil?
+      config.local = true
+      config.use_redis = false
+      config.verbose = @verbose unless @verbose.nil?
+    end
   end
 end
 
