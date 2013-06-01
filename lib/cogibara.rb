@@ -76,4 +76,4 @@ require 'cogibara/transcriber.rb'
 require 'cogibara/confirmer.rb'
 require 'cogibara/operator_base.rb'
 
-
+Cogibara.default_config

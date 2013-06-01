@@ -3,6 +3,98 @@ require 'cogibara'
 require 'slop'
 require 'redis'
 
+class Listener
+
+  def record(duration, threshold=0.1)
+    z = `arecord -f cd -d #{duration}`
+    f = File.open('record.wav','wb'){|fi| fi.write z}
+    volume = `sox record.wav -n "stats" 2>&1`.scan(/Max level.*\n/).first.chomp.gsub("Max level","").strip.to_f
+    `rm record.wav`
+    volume > threshold ? z : nil
+  end
+
+  def speak(message)
+    # engine = Cogibara::config.speech_engine
+    # voice = Cogibara::config.voice
+    engine = :pico
+
+    if engine == :pico
+      `pico2wave -w speech.wav "#{message}"`
+      `aplay speech.wav`
+      `rm speech.wav`
+    elsif engine == :festival
+      `echo #{message} | text2wave | aplay`
+    else
+      `espeak #{message}`
+    end
+  end
+
+  def sleep_mode
+    loop do
+      puts "sleeping"
+      audio = nil
+      until audio
+        audio = record(3,0.3)
+      end
+      begin
+        @transcriber.transcribe(audio)
+        return
+      rescue
+
+      end
+    end
+  end
+
+  def get_message(tries=3)
+    #should play a sound
+    puts "listening!"
+    loop do
+      audio = record(@basedur)
+      audio = record(@basedur) unless audio
+
+      unless audio
+        sleep_mode 
+      else
+        #play a sound as well
+        puts "Processing"
+
+        msg = nil
+        begin
+          msg = @transcriber.transcribe(audio)
+          return msg
+        rescue Exception
+          puts "failed to transcribe  (#{$!})"
+        end
+      end
+    end
+    speak("Sorry, I couldn't understand you")
+  end
+
+  def ask_once
+    message = get_message
+    puts message
+    answer = ""
+    if message
+      answer = Cogibara::message_handler.handle(message)
+    end
+    speak(answer)
+    answer
+  end
+
+  def initialize
+    @transcriber = Cogibara::Transcriber.new
+
+    @basedur = 8
+  end
+
+  def ask_loop
+    loop do
+      puts ask_once
+    end
+  end
+
+end
+
 def text(msg)
   Cogibara::message_handler.handle(msg)
 end
@@ -31,6 +123,8 @@ def parse
     on 'n=', 'name', 'Name'
     on 'c=', 'config', 'Configuration file (.rb)'
     on 'r', 'redis', 'Standalone Redis mode'
+    on 'a', 'audio', 'Audio mode (uses microphone)'
+    on 'la', 'looped-audio', 'Looped Audio mode'
   end
 
   @verbose = opts.verbose?
@@ -38,12 +132,12 @@ def parse
   @name = opts[:name] || "cogibara"
   @config_file = opts[:config]
   @redis_mode = opts[:redis]
+  @audio = opts[:audio]
+  @looped_audio = !@audio && opts[:looped_audio]
 
   if !@msg
     if @config_file
       @verbose = false
-      configure
-      text_loop
     else
       @msg = ARGV.join(' ')
       if File.exist?("./#{@msg}")
@@ -75,6 +169,7 @@ def configure
 end
 
 def standalone_redis
+  Cogibara::config.use_redis = true
   @red = Redis.new
   Redis.new.subscribe(:toCapy) do |on|
     on.message do |channel, msg|
@@ -103,4 +198,12 @@ configure
 
 standalone_redis if @redis_mode
 
-ARGV[0] && (@msg != @config_file) ? text_or_file : text_loop
+if @audio
+  Listener.new.ask_once
+elsif @looped_audio
+  Listener.new.ask_loop if @looped_audio
+elsif ARGV[0] && (@msg != @config_file)
+  text_or_file
+else
+  text_loop
+end

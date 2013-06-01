@@ -14,7 +14,12 @@ module Cogibara
 
     def transcribe(file)
       filestring = make_temp_file(file)
-      result = Speech::AudioToText.new(filestring).to_json #(2, "en-US")
+      begin
+        result = Speech::AudioToText.new(filestring).to_json #(2, "en-US")
+      rescue
+        remove_temp_file
+        raise
+      end
       remove_temp_file filestring
       # puts result
       if(result["hypotheses"].first)

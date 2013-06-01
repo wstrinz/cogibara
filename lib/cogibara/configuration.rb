@@ -7,12 +7,13 @@ module Cogibara
       {
         name: "cogibara",
         speak: false,
+        speech_engine: :espeak,
         text: true,
         hard_parse: true,
         soft_parse: true,
         verbose: true,
         local: false,
-        use_redis: true,
+        use_redis: false,
       }
     end
 

@@ -7,6 +7,8 @@ For a demo, try tweeting [@Cogibara](https://twitter.com/cogibara), or check out
 **NOTE**  
 This gem is still in development, there is no documentation besides this readme, I haven't written any tests, and important things may be implemented in very silly ways. Feel free [tell me](https://github.com/wstrinz/cogibara/issues) where this is so (I'd appreciate it in fact), but you've been warned. I was planning on keeping this private for a few more months of development, however other projects have come up for the summer, so I'm releasing what I have now in case I don't get much time to work on it.
 
+Mainly because of the way the [speech2text](https://github.com/taf2/speech2text) gem is implemented, this will only work with MRI, and likely just linux as well.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -43,13 +45,13 @@ The gem will install the `cogibara` executable. You can run it without arguments
     cogibara -m "hows it going?"
       #=> cogibara: Good and you?
 
-    cogibara -c config.rb -m "what time is it in the netherlands?"
+    cogibara -c config.yml -m "what time is it in the netherlands?"
       #=> cogibara: 7:30:40 am CEST  |  Wednesday, May 29, 2013
 
 
-The `cogibara-local` executable is a command line interface for the gem. 
+The `cogibara` executable is a command line interface for the gem. 
     
-    Usage: cogibara-local [options]
+    Usage: cogibara [options]
     -v, --verbose      Verbose output
     -m, --message      Message
     -n, --name         Name
@@ -62,7 +64,7 @@ If a message is specifed, the executable will print the response then exit. Othe
 You can also run `cogibara` on a yaml or Ruby file to start the interactive loop using the configuration it specifies, or on an audio or video file (less than 10 seconds seems to work best), in which case it will extract the speech from it using google's Speech To Text API, then pass the result to the gem.
 
 **Cogibara Redis**  
-Running `cogibara` with the `-r` flag will start the stand-alone Redis client, allowing you to design your own interfaces for the gem. For now it requires a local Redis server to be installed and running, so its probably better just to use the gem in your program, but in the near future it will allow remote Redis connections as well. This could also be used to split up the work of running the gem and serving the responses between computers, giving you the ability to install a lightweight interface on something like a Raspberry Pi and leave the heavy lifting to a desktop PC.
+Running `cogibara` with the `-r` flag will start the executable in Redis mode, allowing you to design your own interfaces for the gem. For now it requires a local Redis server to be installed and running, so its probably better just to use the gem in a program, but in the near future it will allow remote Redis connections as well. This could also be used to split up the work of running the gem and serving the responses between computers, giving you the ability to install a lightweight interface on something like a Raspberry Pi and leave the heavy lifting to a desktop PC.
 
 For more on how to use this executable, see the example Rails client [here](https://github.com/wstrinz/cogibara-client).
 
