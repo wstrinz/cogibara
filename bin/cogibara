@@ -124,7 +124,13 @@ def parse
     on 'c=', 'config', 'Configuration file (.rb)'
     on 'r', 'redis', 'Standalone Redis mode'
     on 'a', 'audio', 'Audio mode (uses microphone)'
-    on 'la', 'looped-audio', 'Looped Audio mode'
+    on 'l', 'looped-audio', 'Looped Audio mode'
+    on 'h', 'help', 'Help'
+  end
+
+  if opts[:help]
+    puts opts
+    exit
   end
 
   @verbose = opts.verbose?
