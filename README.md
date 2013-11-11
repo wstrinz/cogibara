@@ -1,6 +1,6 @@
 # Cogibara
 
-** This repository is no longer maintained or updated ** see [https://github.com/Cogibara/cogibara](https://github.com/Cogibara/cogibara)
+**This repository is no longer maintained or updated** see [https://github.com/Cogibara/cogibara](https://github.com/Cogibara/cogibara)
     
 Your friendly natural language interface to computer and the internet, leveraging the power of NLP techniques used in applications such as Siri! Why let your someone else decide what you need your personal assistant software to do? Cogibara uses free and open source libraries and APIs to let you ask general knowledge or math questions, manage your calendar, or just chat when you're bored. It's easy to add new capabilites or integrate other tools; the gem handles the infrastructure and language processing so you can focus on making your Cogibara do whatever awesome things you want it to.
 
